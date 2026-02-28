@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    container_name: openclaw-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=OpenClaw Backend
+      - APP_ENV=development
+      - DATABASE_URL=postgresql+asyncpg://neondb_owner:npg_ixqrSu5LZkA3@ep-jolly-feather-aixu2cx1-pooler.c-4.us-east-1.aws.neon.tech/neondb
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Local PostgreSQL for development
+  # Uncomment if you want to use local database instead of Neon
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: openclaw-postgres
+  #   environment:
+  #     - POSTGRES_USER=openclaw
+  #     - POSTGRES_PASSWORD=openclaw_password
+  #     - POSTGRES_DB=openclaw_db
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
+
