@@ -5,10 +5,10 @@ services:
   - type: web
     name: openclaw-backend
     env: python
-    runtime: python-3.11.9
+    runtime: python-3.11.0
     region: oregon
     plan: free
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install --no-cache-dir -r requirements.txt
     startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 2
     healthCheckPath: /health
     envVars:
