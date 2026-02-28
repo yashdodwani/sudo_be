@@ -1,7 +1,7 @@
-# FastAPI Core - using older stable versions with pre-built wheels
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.4.2
+# FastAPI Core - using versions with GUARANTEED pre-built wheels
+fastapi==0.103.2
+uvicorn[standard]==0.23.2
+pydantic==2.3.0
 pydantic-settings==2.0.3
 
 # Database
