@@ -19,6 +19,7 @@ engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.APP_ENV == "development",
     future=True,
+    connect_args={"ssl": "require"}
 )
 
 # Create async session factory
